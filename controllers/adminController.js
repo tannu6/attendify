@@ -1,5 +1,15 @@
 var db = require('../config/db');
 
+var adminRoot = function(req, res) {
+    res.json({
+        message: 'Admin endpoints',
+        routes: {
+            dashboard: '/admin/dashboard',
+            logs: '/admin/logs'
+        }
+    });
+};
+
 var dashboard = function(req, res) {
     var summary = {};
     db.serialize(function() {
@@ -39,4 +49,4 @@ var certificateLogs = function(req, res) {
     });
 };
 
-module.exports = { dashboard, certificateLogs };
+module.exports = { adminRoot, dashboard, certificateLogs };

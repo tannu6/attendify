@@ -1,6 +1,25 @@
 var bcrypt = require('bcryptjs');
 var db = require('../config/db');
 
+var authRoot = function(req, res) {
+    res.json({
+        message: 'Authentication endpoints',
+        routes: {
+            login: '/auth/login',
+            register: '/auth/register',
+            logout: '/auth/logout'
+        }
+    });
+};
+
+var loginPage = function(req, res) {
+    res.send('<h1>Login</h1><p>Use POST /auth/login with JSON body {"email":"...","password":"..."}.</p>');
+};
+
+var registerPage = function(req, res) {
+    res.send('<h1>Register</h1><p>Use POST /auth/register with JSON body {"name":"...","email":"...","password":"...","role":"organization|admin|recipient"}.</p>');
+};
+
 var register = function(req, res) {
     var { name, email, password, role, org_name } = req.body;
     if (!name || !email || !password || !role) {
@@ -72,4 +91,4 @@ var logout = function(req, res) {
     });
 };
 
-module.exports = { register, login, logout };
+module.exports = { authRoot, loginPage, registerPage, register, login, logout };
