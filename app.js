@@ -2,6 +2,7 @@ var express = require('express');
 var session = require('express-session');
 require('dotenv').config();
 var path = require('path');
+var db = require('./config/db');
 var authRoutes = require('./routes/authRoutes');
 var eventRoutes = require('./routes/eventRoutes');
 var attendanceRoutes = require('./routes/attendanceRoutes');
@@ -11,8 +12,9 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 var sessionConfig = {
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'secret-key',
     resave: false,
     saveUninitialized: false
 };
