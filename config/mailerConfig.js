@@ -19,7 +19,7 @@ var sendMail = function(to, subject, html, callback) {
     mailOptions.html = html;
     
     transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
+        if (error){
             console.log(error);
             callback(error);
         } else {
